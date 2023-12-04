@@ -1,0 +1,20 @@
+<div class="menu">
+  <div id="acces">
+    <a id="Home" routerLink="/Home">Home</a>
+    <a id="SignIn" routerLink="/SignIn">Sign In</a>
+    <a id="SignUp" routerLink="/SignUp">Sign Up</a>
+  </div>
+  <div id="search">
+    <label for="search-box">Article Search </label>
+    <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+<!--    <ul class="search-result">
+      <li *ngFor="let hero of article$ | async" >
+        <a routerLink="/article/{{article.id}}">
+          {{article.name}}
+        </a>
+      </li>
+    </ul> -->
+  </div>
+</div>
+
+<router-outlet></router-outlet>

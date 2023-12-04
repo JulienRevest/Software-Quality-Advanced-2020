@@ -1,0 +1,163 @@
+<p>This is a register page</p>
+<div class="row ">
+  <div class="col-sm-7 custom-row jumbotron">
+
+    <form novalidate
+          (ngSubmit)="onFormSubmit(signupForm)"
+          #signupForm="ngForm">
+      <fieldset>
+        <legend>Créer un compte</legend>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="inputEmail" class="col-lg-2
+                control-label">Email</label>
+          <div class="col-lg-7">
+            <input type="text" class="form-control"
+                   [ngModel]="user.email" 
+                   name="email"
+                   #email="ngModel" 
+                   id="inputEmail"
+                   placeholder="Email"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                   required>
+          </div>          
+          <!-- Email erreur -->
+          <div *ngIf="email.invalid && ( email.touched)"
+               class="col-sm-3 text-danger">
+            <div *ngIf="email.errors?.required">
+              Le champ email ne peut être vide
+            </div>
+            <div *ngIf="email.errors?.pattern && email.touched">
+              Cet email ne semble pas être valide
+            </div>
+          </div>
+        </div>
+
+        <!-- Login -->
+        <div class="form-group">
+          <label for="login" class="col-lg-2
+              control-label">Identifiant (5 à 20 caractères)</label>
+          <div class="col-lg-7">
+            <input type="login" class="form-control"
+                   ngModel name="login"
+                   id="login" 
+                   placeholder="Identifiant"
+                   minlength="5"
+                   maxlength="20"
+                   required>
+          </div>
+        </div>
+
+        <!-- Mot de passe -->
+        <div ngModelGroup="password" #userPassword="ngModelGroup">
+          <div class="form-group ">
+            <label for="inputPassword" class="col-lg-2 	control-label">Mot de passe</label>
+            <div class="col-lg-7">
+              <input type="password" class="form-control"
+                     ngModel name="pwd"
+                     id="inputPassword" 
+                     placeholder="Mot de passe"
+                     minlength="5" 
+                     maxlength="50"
+                     required>
+            </div>
+          </div>
+          <!-- Confirmation mot de passe -->
+          <div class="form-group">
+            <label for="login" class="col-lg-2
+                control-label">Confirmation</label>
+            <div class="col-lg-7">
+              <input type="password" class="form-control"
+                     ngModel name="confirmPwd"
+                     id="confirmPassword" 
+                     placeholder="Confirmer mot de passe"
+                     required>
+            </div>
+          </div>
+
+          <!-- Erreur de mot de passe -->
+          <div *ngIf="(userPassword.invalid|| userPassword.value?.pwd != userPassword.value?.confirmPwd) && (userPassword.touched)"
+               class="col-sm-3 text-danger">
+
+            <div *ngIf="userPassword.invalid; else nomatch">
+              Le mot de passe doit être compris entre 5 et 50 caractères
+            </div>
+            <ng-template #nomatch>
+              Les mots de passe ne sont pas identiques
+            </ng-template>
+
+          </div>
+        </div>
+
+        <br>
+        <!-- Pays -->
+        <div class="form-group">
+          <label for="select" class="col-lg-2">Pays</label>
+          <div class="col-lg-7">
+            <select id="select" class="form-control"
+                    [ngModel]="user.country" 
+                    name="country"
+                    required>
+
+              <option *ngFor="let c of country"
+                      [value]="c">
+                {{c}}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <!-- TEST -->
+
+        <div class="form-group">
+          <label for="phone" class="col-lg-2
+              control-label">Téléphone</label>
+          <div class="col-lg-7">
+            <input type="phone" class="form-control"
+                   ngModel 
+                   name="phone"
+                   id="phone" 
+                   placeholder="Téléphone"
+                   required>            
+          </div>
+        </div>
+
+        <!-- /TEST -->
+
+        <!-- Termes et conditions -->
+
+        <div class="form-group checkbox">
+          <div class="col-lg-6 ">
+            <input type="checkbox"
+                   ngModel name="terms"
+                   #terms="ngModel"
+                   required> Veuillez accepter les termes et conditions
+          </div>
+
+
+          <!-- Erreur termes et conditions -->
+          <div *ngIf="(terms.invalid && terms.touched)"
+               class="col-lg-4 text-danger">
+            Vous devez cocher cette case pour continuer
+          </div>
+        </div>
+
+        <!-- Bouton submit et annuler -->
+        <div class="form-group ">
+          <div class="col-lg-10 col-lg-offset-2">
+            <button type="reset" class="btn btn-default">Annuler</button>
+            <button type="submit" class="btn btn-success"
+                    [disabled]="!signupForm.form.valid">
+              Valider
+            </button>
+          </div>
+        </div>
+
+
+      </fieldset>
+    </form>
+    
+  </div>
+  </div>
+{{user | json}}

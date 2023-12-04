@@ -1,0 +1,74 @@
+<div class="text-center signin-container">
+  <h1>Connexion</h1>
+  <div class="container login-container">
+    <div class="row">
+      <div class="col-12 col-md-8 offset-md-2">
+        <div class="card">
+          <div class="card-body">
+            <form [formGroup]="myLoginForm" class="mx-auto" (ngSubmit)="onSubmit()">
+              <!-- <div [hidden]="formDir.submitted"> -->
+
+                <!-- <div class="cross-validation" [class.cross-validation-error]="loginForm.touched || loginForm.dirty"> -->
+                
+                  <div class="form-group">
+                    <label>Login <span class="text-danger">*</span></label>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <fa-icon [icon]="faAddressCard"></fa-icon>
+                        </span>
+                      </div>
+                      <input type="text" id="username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+
+                      <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                        <div *ngIf="f.username.errors.required">Le nom d'utilisateur / login est requis</div>
+                        <div *ngIf="f.username.errors.minlength">Le nom d'utilisateur / login doit contenir au moins 5 caractères</div>
+                        <div *ngIf="f.username.errors.maxlength">Le nom d'utilisateur / login ne peut pas contenir plus de 50 caractères</div>
+                        <div *ngIf="f.username.errors.pattern">Le nom d'utilisateur / login ne peut pas contenir de caractères spéciaux</div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Mot de passe <span class="text-danger">*</span></label>
+                      <div class="input-group">
+                        <input [type]="fieldTextType ? 'text' : 'password'" formControlName="password" id="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                        <div class="input-group-append">
+                          <span id="icon-passwd" class="input-group-text" (click)="togglefieldTextType()">
+                            <fa-icon [icon]="faEye" *ngIf="fieldTextType"></fa-icon>
+                            <fa-icon [icon]="faEyeSlash" *ngIf="!fieldTextType"></fa-icon>
+                          </span>
+                        </div>
+
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                          <div *ngIf="f.password.errors.required">Le mot de passe est obligatoire</div>
+                          <div *ngIf="f.password.errors.minlength">Le mot de passe doit contenir au moins 5 caractères</div>
+                          <div *ngIf="f.password.errors.maxlength">Le mot de passe ne peut pas contenir plus de 50 caractères</div>
+                          <div *ngIf="f.password.errors.pattern">Le mot de passe ne peut pas contenir de caractères spéciaux</div>
+                        </div>
+
+                      </div>
+                  </div>
+
+                  
+                  <button class="btn-primary btn btn-block" type="submit" >
+                    Se connecter
+                  </button>
+
+                <!-- </div> -->
+
+
+              <!-- </div> -->
+            </form>
+          </div>
+          <span class="text-danger mb-2 font-italic font-weight-light">* Champs requis</span>
+        </div>
+
+        <a class="text-primary" routerLink="/">Pas encore incrit ? Créez un compte !</a>
+
+      </div>
+    </div>
+  </div>
+</div>
